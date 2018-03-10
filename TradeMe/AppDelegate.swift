@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupNavigation(_ splitViewController: UISplitViewController) {
         coordinator.categoryNavigation = splitViewController.viewControllers[0] as! UINavigationController
         coordinator.listingsNavigation = splitViewController.viewControllers[1] as! UINavigationController
+        coordinator.splitViewController = splitViewController
     }
 }
 

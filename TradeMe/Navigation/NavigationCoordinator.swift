@@ -3,11 +3,17 @@
 import Foundation
 import UIKit
 
-class NavigationCoordinator {
+protocol CategoryBrowserDelegate: class {
+    func updateCategory(id: Int)
+}
+
+class NavigationCoordinator: CategoryBrowserDelegate {
     // Force unwrapping is intentional.
     // It should lead to an early crash in case of the wrong setup.
     var categoryNavigation: UINavigationController?
     var listingsNavigation: UINavigationController?
+    var splitViewController: UISplitViewController?
+    
     var networking = NetworkManager()
 
     func start() {
@@ -28,6 +34,7 @@ class NavigationCoordinator {
     func presentCategory(_ categories: [SearchResult.Category]) {
         let viewController = CategoryViewController()
         viewController.categories = categories
+        viewController.delegate = self
         categoryNavigation?.pushViewController(viewController
             , animated: true)
     }
@@ -35,6 +42,9 @@ class NavigationCoordinator {
     func presentListings(_ listings: [SearchResult.Listing]) {
         let viewController = ListingsViewController()
         viewController.listings = listings
-        listingsNavigation?.pushViewController(viewController, animated: true)
+        viewController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+//        [detailViewController.navigationController.navigationController popToRootViewControllerAnimated:YES]
+        viewController.navigationController?.navigationController?.popToRootViewController(animated: true)
+        listingsNavigation?.viewControllers = [viewController]
     }
 }
