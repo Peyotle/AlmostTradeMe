@@ -4,47 +4,54 @@ import Foundation
 import UIKit
 
 protocol CategoryBrowserDelegate: class {
-    func updateCategory(id: Int)
+    func updateCategory(id: Int, name: String)
 }
 
 class NavigationCoordinator: CategoryBrowserDelegate {
-    // Force unwrapping is intentional.
-    // It should lead to an early crash in case of the wrong setup.
     var categoryNavigation: UINavigationController?
     var listingsNavigation: UINavigationController?
     var splitViewController: UISplitViewController?
-    
-    var networking = NetworkManager()
+
+    var selectedCategoryId: Int = 0
+    var parentCategoryId: Int?
+    var networking = NetworkManagerImpl()
 
     func start() {
-        updateCategory(id: 0)
+        updateCategory(id: 0, name: "Category")
     }
 
-    func updateCategory(id: Int) {
+    func updateCategory(id: Int, name: String) {
         networking.updateCategory(id) { [weak self] result in
             guard let result = result else {
                 print("No Result")
                 return
             }
-            self?.presentCategory(result.categories)
+            let model = CategoryModel(categories: result.categories,
+                                      name: name,
+                                      id: id,
+                                      parentCategoryId: self?.parentCategoryId)
+            self?.presentCategory(model)
             self?.presentListings(result.listings)
+
+            self?.parentCategoryId = id
         }
     }
 
-    func presentCategory(_ categories: [SearchResult.Category]) {
-        let viewController = CategoryViewController()
-        viewController.categories = categories
+    func presentCategory(_ model: CategoryModel) {
+        let viewController = CategoryViewController(with: model)
+
         viewController.delegate = self
-        categoryNavigation?.pushViewController(viewController
-            , animated: true)
+        categoryNavigation?.pushViewController(viewController, animated: true)
     }
 
     func presentListings(_ listings: [SearchResult.Listing]) {
         let viewController = ListingsViewController()
         viewController.listings = listings
         viewController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-//        [detailViewController.navigationController.navigationController popToRootViewControllerAnimated:YES]
-        viewController.navigationController?.navigationController?.popToRootViewController(animated: true)
         listingsNavigation?.viewControllers = [viewController]
+    }
+
+    func navigateBack() {
+
     }
 }

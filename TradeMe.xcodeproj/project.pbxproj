@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0C41CDED3D562FC4051D62 /* Pods_TradeMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02ED9B9F26A6A4EFBC2F0FA5 /* Pods_TradeMeTests.framework */; };
 		7C8FE32F20529F56004EE33E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE32E20529F56004EE33E /* AppDelegate.swift */; };
 		7C8FE33120529F56004EE33E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE33020529F56004EE33E /* CategoryViewController.swift */; };
 		7C8FE33620529F56004EE33E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C8FE33520529F56004EE33E /* Assets.xcassets */; };
@@ -17,6 +18,8 @@
 		7C8FE35520537F18004EE33E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35320537F18004EE33E /* SearchResult.swift */; };
 		7C8FE35820538148004EE33E /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35720538148004EE33E /* NavigationCoordinator.swift */; };
 		7C8FE35A205382F0004EE33E /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE359205382F0004EE33E /* ListingsViewController.swift */; };
+		7C8FE35E2053A66B004EE33E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35D2053A66B004EE33E /* CategoryModel.swift */; };
+		FB76ED972BBA2B90C9B13C77 /* Pods_TradeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6972AA543E30F26C593308CF /* Pods_TradeMe.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +33,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02ED9B9F26A6A4EFBC2F0FA5 /* Pods_TradeMeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TradeMeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		089D9EA0500C4ADC2724B795 /* Pods-TradeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe.release.xcconfig"; sourceTree = "<group>"; };
+		650C7E866B0EE9E20ACAA945 /* Pods-TradeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe.debug.xcconfig"; sourceTree = "<group>"; };
+		6972AA543E30F26C593308CF /* Pods_TradeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TradeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8FE32B20529F56004EE33E /* TradeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8FE32E20529F56004EE33E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C8FE33020529F56004EE33E /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +51,9 @@
 		7C8FE35320537F18004EE33E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		7C8FE35720538148004EE33E /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		7C8FE359205382F0004EE33E /* ListingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingsViewController.swift; sourceTree = "<group>"; };
+		7C8FE35D2053A66B004EE33E /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		9A921B8BD74D9AFF691CB372 /* Pods-TradeMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMeTests/Pods-TradeMeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD16D67344C23D4CC4EA1795 /* Pods-TradeMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMeTests/Pods-TradeMeTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB76ED972BBA2B90C9B13C77 /* Pods_TradeMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D0C41CDED3D562FC4051D62 /* Pods_TradeMeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +82,8 @@
 				7C8FE32D20529F56004EE33E /* TradeMe */,
 				7C8FE34220529F56004EE33E /* TradeMeTests */,
 				7C8FE32C20529F56004EE33E /* Products */,
+				F74D22F6E104DFEF6535E763 /* Pods */,
+				BA9EAA536F85255076DA9DF1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,13 +99,13 @@
 		7C8FE32D20529F56004EE33E /* TradeMe */ = {
 			isa = PBXGroup;
 			children = (
+				7C8FE32E20529F56004EE33E /* AppDelegate.swift */,
 				7C8FE3562053812F004EE33E /* Navigation */,
 				7C8FE35320537F18004EE33E /* SearchResult.swift */,
 				7C8FE35220537F18004EE33E /* SearchResults.json */,
 				7C8FE34F20537E90004EE33E /* Networking */,
-				7C8FE32E20529F56004EE33E /* AppDelegate.swift */,
-				7C8FE33020529F56004EE33E /* CategoryViewController.swift */,
-				7C8FE359205382F0004EE33E /* ListingsViewController.swift */,
+				7C8FE35C2053A442004EE33E /* Categories */,
+				7C8FE35B2053A439004EE33E /* Listings */,
 				7C8FE33520529F56004EE33E /* Assets.xcassets */,
 				7C8FE33720529F56004EE33E /* LaunchScreen.storyboard */,
 				7C8FE33A20529F56004EE33E /* Info.plist */,
@@ -124,6 +138,43 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		7C8FE35B2053A439004EE33E /* Listings */ = {
+			isa = PBXGroup;
+			children = (
+				7C8FE359205382F0004EE33E /* ListingsViewController.swift */,
+			);
+			path = Listings;
+			sourceTree = "<group>";
+		};
+		7C8FE35C2053A442004EE33E /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7C8FE33020529F56004EE33E /* CategoryViewController.swift */,
+				7C8FE35D2053A66B004EE33E /* CategoryModel.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		BA9EAA536F85255076DA9DF1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6972AA543E30F26C593308CF /* Pods_TradeMe.framework */,
+				02ED9B9F26A6A4EFBC2F0FA5 /* Pods_TradeMeTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F74D22F6E104DFEF6535E763 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				650C7E866B0EE9E20ACAA945 /* Pods-TradeMe.debug.xcconfig */,
+				089D9EA0500C4ADC2724B795 /* Pods-TradeMe.release.xcconfig */,
+				9A921B8BD74D9AFF691CB372 /* Pods-TradeMeTests.debug.xcconfig */,
+				DD16D67344C23D4CC4EA1795 /* Pods-TradeMeTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,9 +182,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C8FE34820529F56004EE33E /* Build configuration list for PBXNativeTarget "TradeMe" */;
 			buildPhases = (
+				08BBF55DEB34F84182247BDF /* [CP] Check Pods Manifest.lock */,
 				7C8FE32720529F56004EE33E /* Sources */,
 				7C8FE32820529F56004EE33E /* Frameworks */,
 				7C8FE32920529F56004EE33E /* Resources */,
+				9C6140790B13F6B63030A2A9 /* [CP] Embed Pods Frameworks */,
+				11B003E87708D5EC51875BD4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,9 +202,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C8FE34B20529F56004EE33E /* Build configuration list for PBXNativeTarget "TradeMeTests" */;
 			buildPhases = (
+				61E4EC8A7D73059F1F94E4A7 /* [CP] Check Pods Manifest.lock */,
 				7C8FE33B20529F56004EE33E /* Sources */,
 				7C8FE33C20529F56004EE33E /* Frameworks */,
 				7C8FE33D20529F56004EE33E /* Resources */,
+				B85393630D8E42D78D5AC69A /* [CP] Embed Pods Frameworks */,
+				2E45034B9F312243C94A9965 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -221,6 +278,108 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		08BBF55DEB34F84182247BDF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TradeMe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		11B003E87708D5EC51875BD4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E45034B9F312243C94A9965 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradeMeTests/Pods-TradeMeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61E4EC8A7D73059F1F94E4A7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TradeMeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C6140790B13F6B63030A2A9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B85393630D8E42D78D5AC69A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradeMeTests/Pods-TradeMeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7C8FE32720529F56004EE33E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -230,6 +389,7 @@
 				7C8FE33120529F56004EE33E /* CategoryViewController.swift in Sources */,
 				7C8FE35520537F18004EE33E /* SearchResult.swift in Sources */,
 				7C8FE35820538148004EE33E /* NavigationCoordinator.swift in Sources */,
+				7C8FE35E2053A66B004EE33E /* CategoryModel.swift in Sources */,
 				7C8FE32F20529F56004EE33E /* AppDelegate.swift in Sources */,
 				7C8FE35A205382F0004EE33E /* ListingsViewController.swift in Sources */,
 			);
@@ -374,6 +534,7 @@
 		};
 		7C8FE34920529F56004EE33E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 650C7E866B0EE9E20ACAA945 /* Pods-TradeMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -389,6 +550,7 @@
 		};
 		7C8FE34A20529F56004EE33E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 089D9EA0500C4ADC2724B795 /* Pods-TradeMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -404,6 +566,7 @@
 		};
 		7C8FE34C20529F56004EE33E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A921B8BD74D9AFF691CB372 /* Pods-TradeMeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -421,6 +584,7 @@
 		};
 		7C8FE34D20529F56004EE33E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD16D67344C23D4CC4EA1795 /* Pods-TradeMeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

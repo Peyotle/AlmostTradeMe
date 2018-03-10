@@ -8,7 +8,18 @@ class CategoryViewController: UIViewController {
     weak var delegate: CategoryBrowserDelegate?
 
     var categories = [SearchResult.Category]()
+    var model: CategoryModel
 
+    init(with model: CategoryModel) {
+        self.model = model
+        self.categories = model.categories
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         self.view = UITableView()
     }
@@ -16,6 +27,7 @@ class CategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        self.title = model.name
     }
 
     func setupTableView() {
@@ -29,11 +41,11 @@ extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCategory = categories[indexPath.row]
         print("Selected category: \(selectedCategory)")
-        pushViewController(for: selectedCategory.categoryId)
+        pushViewController(for: selectedCategory.categoryId, name: selectedCategory.name)
     }
 
-    func pushViewController(for categoryId: Int) {
-        delegate?.updateCategory(id: categoryId)
+    func pushViewController(for categoryId: Int, name: String) {
+        delegate?.updateCategory(id: categoryId, name: name)
     }
 }
 
