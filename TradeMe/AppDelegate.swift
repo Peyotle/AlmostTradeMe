@@ -20,28 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setupRootViewController() -> UISplitViewController {
         let splitViewController = UISplitViewController()
-        splitViewController.delegate = self
+        splitViewController.delegate = coordinator
         let masterNavigator = UINavigationController()
         let detailNavigator = UINavigationController()
         splitViewController.viewControllers = [masterNavigator, detailNavigator]
+//        splitViewController.preferredDisplayMode = .primaryHidden
         return splitViewController
     }
 
     private func setupNavigation(_ splitViewController: UISplitViewController) {
-        coordinator.categoryNavigation = splitViewController.viewControllers[0] as! UINavigationController
-        coordinator.listingsNavigation = splitViewController.viewControllers[1] as! UINavigationController
+        coordinator.categoryNavigation = splitViewController.viewControllers[0] as? UINavigationController
+        coordinator.listingsNavigation = splitViewController.viewControllers[1] as? UINavigationController
         coordinator.splitViewController = splitViewController
     }
 }
-
-extension AppDelegate: UISplitViewControllerDelegate {
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
-        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? ListingsViewController else { return false }
-        if topAsDetailController.listings.count == 0 {
-            return true
-        }
-        return false
-    }
-}
-

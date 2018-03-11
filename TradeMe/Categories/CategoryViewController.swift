@@ -48,12 +48,11 @@ class CategoryViewController: UIViewController {
 extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCategory = categories[indexPath.row]
-        print("Selected category: \(selectedCategory)")
-        pushViewController(for: selectedCategory.categoryId, name: selectedCategory.name)
-    }
-
-    func pushViewController(for categoryId: Int, name: String) {
-        delegate?.moveToCategory(id: categoryId, name: name)
+        if selectedCategory.hasSubcategory {
+            delegate?.moveToCategory(id: selectedCategory.categoryId, name: selectedCategory.name)
+        } else {
+            delegate?.updateCategory(id: selectedCategory.categoryId, name: selectedCategory.name)
+        }
     }
 }
 
@@ -76,9 +75,8 @@ extension CategoryViewController: UITableViewDataSource {
 
     func setupCell(cell: UITableViewCell, for indexPath: IndexPath) {
         let category = categories[indexPath.row]
-        if category.count > 0 {
+        if category.hasSubcategory {
             cell.accessoryType = .disclosureIndicator
-
         }
         cell.textLabel?.text = category.name
     }

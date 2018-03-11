@@ -8,12 +8,14 @@ struct SearchResult: Codable {
         let name: String
         let category: String
         let count: Int
-
+        let isLeaf: Bool?
+        
         private enum CodingKeys: String, CodingKey {
             case categoryId = "CategoryId"
             case name = "Name"
             case category = "Category"
             case count = "Count"
+            case isLeaf = "IsLeaf"
         }
     }
     struct Listing: Codable {
@@ -41,5 +43,11 @@ struct SearchResult: Codable {
         case pageSize = "PageSize"
         case listings = "List"
         case categories = "FoundCategories"
+    }
+}
+
+extension SearchResult.Category {
+    var hasSubcategory: Bool {
+        return self.isLeaf == nil || self.isLeaf == false
     }
 }

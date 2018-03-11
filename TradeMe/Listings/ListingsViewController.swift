@@ -21,8 +21,10 @@ class ListingsViewController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(ListingCollectionViewCell.self,
-                                forCellWithReuseIdentifier: listingCellIdentifier)
+        collectionView.register(ListingCollectionViewCell.self, forCellWithReuseIdentifier: listingCellIdentifier)
+        if #available(iOS 11.0, *) {
+            collectionView.contentInsetAdjustmentBehavior = .always
+        }
     }
 
     let layout: UICollectionViewFlowLayout = {
