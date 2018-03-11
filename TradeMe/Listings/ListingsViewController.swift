@@ -15,14 +15,13 @@ class ListingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        print("Listings: \(listings)")
     }
 
     func setupCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self,
+        collectionView.register(ListingCollectionViewCell.self,
                                 forCellWithReuseIdentifier: listingCellIdentifier)
     }
 
@@ -43,7 +42,7 @@ class ListingsViewController: UIViewController {
 extension ListingsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let listing = listings[indexPath.row]
-        print(listing)
+        print(listing.title)
     }
 }
 
@@ -53,21 +52,9 @@ extension ListingsViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listingCellIdentifier, for: indexPath)
-        setupCell(cell, indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listingCellIdentifier, for: indexPath) as! ListingCollectionViewCell
+        cell.setup(with: listings[indexPath.row])
         return cell
-    }
-
-    func setupCell(_ cell: UICollectionViewCell, _ indexPath: IndexPath) {
-        cell.contentView.backgroundColor = .white
-        cell.contentView.layer.cornerRadius = 20.0
-        cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
-        cell.contentView.layer.borderWidth = 1.0
-        let label = UILabel()
-        label.text = listings[indexPath.row].title
-        label.sizeToFit()
-        cell.contentView.addSubview(label)
-        label.center = cell.contentView.center
     }
 
 }

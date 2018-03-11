@@ -20,7 +20,7 @@ struct SearchResult: Codable {
         let listingId: Int
         let title: String
         let category: String
-        let pictureHref: URL
+        let pictureHref: URL?
 
         private enum CodingKeys: String, CodingKey {
             case listingId = "ListingId"

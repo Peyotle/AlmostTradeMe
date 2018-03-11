@@ -4,44 +4,61 @@ import Foundation
 import UIKit
 
 protocol CategoryBrowserDelegate: class {
-    func updateCategory(id: Int, name: String)
+    func moveToCategory(id: Int, name: String)
+    func movingBack(to categoryId: Int?)
 }
 
 class NavigationCoordinator: CategoryBrowserDelegate {
+    typealias categoryUpdateCompletion = (SearchResult?) -> ()
     var categoryNavigation: UINavigationController?
     var listingsNavigation: UINavigationController?
     var splitViewController: UISplitViewController?
 
     var selectedCategoryId: Int = 0
-    var parentCategoryId: Int?
+    var currentCategoryId: Int?
     var networking = NetworkManagerImpl()
 
     func start() {
-        updateCategory(id: 0, name: "Category")
+        moveToCategory(id: 0, name: "Category")
     }
 
-    func updateCategory(id: Int, name: String) {
-        networking.updateCategory(id) { [weak self] result in
+    func moveToCategory(id: Int, name: String) {
+        self.presentCategory()
+        networking.getCategory(id) { [weak self] result in
             guard let result = result else {
-                print("No Result")
                 return
             }
             let model = CategoryModel(categories: result.categories,
                                       name: name,
                                       id: id,
-                                      parentCategoryId: self?.parentCategoryId)
-            self?.presentCategory(model)
+                                      parentCategoryId: self?.currentCategoryId)
+            self?.updateCategory(model)
             self?.presentListings(result.listings)
-
-            self?.parentCategoryId = id
+            self?.currentCategoryId = id
         }
     }
 
-    func presentCategory(_ model: CategoryModel) {
-        let viewController = CategoryViewController(with: model)
+    private func updateCategory(id: Int, name: String) {
+        self.presentListings([])
+        networking.getCategory(id) { [weak self] result in
+            guard let result = result else {
+                return
+            }
+            self?.presentListings(result.listings)
+            self?.currentCategoryId = id
+        }
+    }
 
+    func presentCategory() {
+        let viewController = CategoryViewController()
         viewController.delegate = self
         categoryNavigation?.pushViewController(viewController, animated: true)
+    }
+
+    func updateCategory(_ model: CategoryModel) {
+        if let viewController = categoryNavigation?.topViewController as? CategoryViewController {
+            viewController.setModel(model)
+        }
     }
 
     func presentListings(_ listings: [SearchResult.Listing]) {
@@ -51,7 +68,11 @@ class NavigationCoordinator: CategoryBrowserDelegate {
         listingsNavigation?.viewControllers = [viewController]
     }
 
-    func navigateBack() {
-
+    func movingBack(to categoryId: Int?) {
+        let viewController = categoryNavigation?.topViewController
+        let title = viewController?.title ?? "General"
+        let categoryId = categoryId ?? 0
+        self.updateCategory(id: categoryId, name: title)
+        print("Moving to: \(categoryId)")
     }
 }

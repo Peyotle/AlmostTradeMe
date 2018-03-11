@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D0C41CDED3D562FC4051D62 /* Pods_TradeMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02ED9B9F26A6A4EFBC2F0FA5 /* Pods_TradeMeTests.framework */; };
+		7C111AF52054CA7500E229AB /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C111AF42054CA7500E229AB /* LoadingTableViewCell.swift */; };
 		7C8FE32F20529F56004EE33E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE32E20529F56004EE33E /* AppDelegate.swift */; };
 		7C8FE33120529F56004EE33E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE33020529F56004EE33E /* CategoryViewController.swift */; };
 		7C8FE33620529F56004EE33E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C8FE33520529F56004EE33E /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 		7C8FE35820538148004EE33E /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35720538148004EE33E /* NavigationCoordinator.swift */; };
 		7C8FE35A205382F0004EE33E /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE359205382F0004EE33E /* ListingsViewController.swift */; };
 		7C8FE35E2053A66B004EE33E /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35D2053A66B004EE33E /* CategoryModel.swift */; };
+		7C8FE36020548897004EE33E /* ListingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35F20548897004EE33E /* ListingCollectionViewCell.swift */; };
 		FB76ED972BBA2B90C9B13C77 /* Pods_TradeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6972AA543E30F26C593308CF /* Pods_TradeMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,7 @@
 		089D9EA0500C4ADC2724B795 /* Pods-TradeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe.release.xcconfig"; sourceTree = "<group>"; };
 		650C7E866B0EE9E20ACAA945 /* Pods-TradeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe.debug.xcconfig"; sourceTree = "<group>"; };
 		6972AA543E30F26C593308CF /* Pods_TradeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TradeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C111AF42054CA7500E229AB /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		7C8FE32B20529F56004EE33E /* TradeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8FE32E20529F56004EE33E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C8FE33020529F56004EE33E /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 		7C8FE35720538148004EE33E /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		7C8FE359205382F0004EE33E /* ListingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingsViewController.swift; sourceTree = "<group>"; };
 		7C8FE35D2053A66B004EE33E /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		7C8FE35F20548897004EE33E /* ListingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingCollectionViewCell.swift; sourceTree = "<group>"; };
 		9A921B8BD74D9AFF691CB372 /* Pods-TradeMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMeTests/Pods-TradeMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD16D67344C23D4CC4EA1795 /* Pods-TradeMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMeTests/Pods-TradeMeTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				7C8FE359205382F0004EE33E /* ListingsViewController.swift */,
+				7C8FE35F20548897004EE33E /* ListingCollectionViewCell.swift */,
 			);
 			path = Listings;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 			children = (
 				7C8FE33020529F56004EE33E /* CategoryViewController.swift */,
 				7C8FE35D2053A66B004EE33E /* CategoryModel.swift */,
+				7C111AF42054CA7500E229AB /* LoadingTableViewCell.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -385,9 +391,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C111AF52054CA7500E229AB /* LoadingTableViewCell.swift in Sources */,
 				7C8FE35120537EC8004EE33E /* NetworkManager.swift in Sources */,
 				7C8FE33120529F56004EE33E /* CategoryViewController.swift in Sources */,
 				7C8FE35520537F18004EE33E /* SearchResult.swift in Sources */,
+				7C8FE36020548897004EE33E /* ListingCollectionViewCell.swift in Sources */,
 				7C8FE35820538148004EE33E /* NavigationCoordinator.swift in Sources */,
 				7C8FE35E2053A66B004EE33E /* CategoryModel.swift in Sources */,
 				7C8FE32F20529F56004EE33E /* AppDelegate.swift in Sources */,
