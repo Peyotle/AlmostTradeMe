@@ -5,10 +5,9 @@ import UIKit
 class CategoryViewController: UIViewController {
     let categoryCellIdentifier = "categoryCell"
     let loadingCellIdentifier = "loadingCell"
+
     var tableView: UITableView { return self.view as! UITableView }
     weak var delegate: CategoryBrowserDelegate?
-    var isLoaded: Bool = false
-
     var categories = [SearchResult.Category]()
     private var model: CategoryModel?
 
@@ -31,7 +30,7 @@ class CategoryViewController: UIViewController {
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: categoryCellIdentifier)
+        tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: categoryCellIdentifier)
         tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: loadingCellIdentifier)
     }
 
@@ -48,11 +47,12 @@ class CategoryViewController: UIViewController {
 extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCategory = categories[indexPath.row]
-        if selectedCategory.hasSubcategory {
-            delegate?.moveToCategory(id: selectedCategory.categoryId, name: selectedCategory.name)
-        } else {
-            delegate?.updateCategory(id: selectedCategory.categoryId, name: selectedCategory.name)
-        }
+        delegate?.showCategory(selectedCategory)
+//        if selectedCategory.hasSubcategory {
+//            delegate?.moveToCategory(id: selectedCategory.categoryId, name: selectedCategory.name)
+//        } else {
+//            delegate?.updateCategory(id: selectedCategory.categoryId, name: selectedCategory.name)
+//        }
     }
 }
 
@@ -68,16 +68,9 @@ extension CategoryViewController: UITableViewDataSource {
         guard (self.model != nil) else {
             return tableView.dequeueReusableCell(withIdentifier: loadingCellIdentifier)!
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellIdentifier)!
-        setupCell(cell: cell, for: indexPath)
-        return cell
-    }
-
-    func setupCell(cell: UITableViewCell, for indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellIdentifier) as! CategoryTableViewCell
         let category = categories[indexPath.row]
-        if category.hasSubcategory {
-            cell.accessoryType = .disclosureIndicator
-        }
-        cell.textLabel?.text = category.name
+        cell.setup(with: category)
+        return cell
     }
 }

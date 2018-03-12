@@ -3,9 +3,12 @@
 import UIKit
 
 protocol CategoryBrowserDelegate: class {
-    func moveToCategory(id: Int, name: String)
-    func updateCategory(id: Int, name: String)
+    func showCategory(_ category: SearchResult.Category)
     func movingBack(to categoryId: Int?)
+}
+
+protocol ListingBrowserDelegate: class {
+    func showListing(_ listing: SearchResult.Listing)
 }
 
 class NavigationCoordinator: CategoryBrowserDelegate {
@@ -17,12 +20,30 @@ class NavigationCoordinator: CategoryBrowserDelegate {
     var selectedCategoryId: Int = 0
     var currentCategoryId: Int?
     var networking = NetworkManagerImpl()
+    var navigationUIManager: SplitNavigationUIManager?
 
     func start() {
+        setupSplitNavigationUIManager()
         moveToCategory(id: 0, name: "Category")
     }
 
-    func moveToCategory(id: Int, name: String) {
+    private func setupSplitNavigationUIManager() {
+        navigationUIManager = SplitNavigationUIManager(with: splitViewController!,
+                                                       listingsNavigation: listingsNavigation!,
+                                                       categoryNavigation: categoryNavigation!)
+        navigationUIManager?.showCategoriesAction = { self.showCategories() }
+        navigationUIManager?.showDetailsAction = { self.showDetails() }
+    }
+
+    func showCategory(_ category: SearchResult.Category) {
+        if category.hasSubcategory {
+            moveToCategory(id: category.categoryId, name: category.name)
+        } else {
+            updateListings(for: category.categoryId, name: category.name)
+        }
+    }
+
+    private func moveToCategory(id: Int, name: String) {
         self.presentCategory()
         networking.getCategory(id) { [weak self] result in
             guard let result = result else {
@@ -37,67 +58,82 @@ class NavigationCoordinator: CategoryBrowserDelegate {
             self?.presentListings(result.listings)
             self?.currentCategoryId = id
         }
+        navigationUIManager?.showNavigationButtonsIfNeeded()
     }
 
-    func updateCategory(id: Int, name: String) {
+    private func updateListings(for categoryId: Int, name: String) {
         self.presentListings([])
-        networking.getCategory(id) { [weak self] result in
+        networking.getCategory(categoryId) { [weak self] result in
             guard let result = result else {
                 return
             }
             self?.presentListings(result.listings)
-            self?.currentCategoryId = id
+            self?.currentCategoryId = categoryId
         }
+        navigationUIManager?.showNavigationButtonsIfNeeded()
     }
 
-    func presentCategory() {
+    private func presentCategory() {
         let viewController = CategoryViewController()
         viewController.delegate = self
-        let navigationButton = UIBarButtonItem(title: "Listings", style: .plain, target: self, action: #selector(self.showDetails))
-        viewController.navigationItem.setRightBarButton(navigationButton, animated: true)
         categoryNavigation?.pushViewController(viewController, animated: true)
     }
 
-    func updateCategory(_ model: CategoryModel) {
+    private func updateCategory(_ model: CategoryModel) {
         if let viewController = categoryNavigation?.topViewController as? CategoryViewController {
             viewController.setModel(model)
         }
     }
 
-    func presentListings(_ listings: [SearchResult.Listing]) {
+    private func presentListings(_ listings: [SearchResult.Listing]) {
         let viewController = ListingsViewController()
+        viewController.delegate = self
+        viewController.imageLoader = NetworkManagerImpl()
+        
         viewController.listings = listings
         viewController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         listingsNavigation?.viewControllers = [viewController]
-        let navigationButton = UIBarButtonItem(title: "Show Categories", style: .plain, target: self, action: #selector(self.showCategories))
-        viewController.navigationItem.setRightBarButton(navigationButton, animated: true)
+        navigationUIManager?.showNavigationButtonsIfNeeded()
     }
 
     func movingBack(to categoryId: Int?) {
         let viewController = categoryNavigation?.topViewController
         let title = viewController?.title ?? "General"
         let categoryId = categoryId ?? 0
-        self.updateCategory(id: categoryId, name: title)
+        self.updateListings(for: categoryId, name: title)
         print("Moving to: \(categoryId)")
     }
 
-    @objc func showDetails() {
-        splitViewController?.showDetailViewController(listingsNavigation!, sender: self)
+    // MARK: - Compact width navigation
+    func showDetails() {
+        splitViewController!.showDetailViewController(listingsNavigation!, sender: self)
+         navigationUIManager?.showNavigationButtonsIfNeeded()
     }
 
-    @objc func showCategories() {
+    func showCategories() {
         if splitViewController!.isCollapsed {
             listingsNavigation!.navigationController?.popViewController(animated: true)
         }
     }
 }
 
+extension NavigationCoordinator: ListingBrowserDelegate {
+    func showListing(_ listing: SearchResult.Listing) {
+        let listingViewController = ListingDetailsViewController()
+        listingViewController.title = listing.title
+        listingsNavigation?.pushViewController(listingViewController, animated: true)
+    }
+}
+
 extension NavigationCoordinator: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController, separateSecondaryFrom primaryViewController: UIViewController) -> UIViewController? {
+        navigationUIManager?.removeNavigationButtons()
         return listingsNavigation!
     }
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
+        listingsNavigation?.popToRootViewController(animated: true)
+        navigationUIManager?.addNavigationButtons()
         return true
     }
 }

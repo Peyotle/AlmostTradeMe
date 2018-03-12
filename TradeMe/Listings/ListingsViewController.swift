@@ -4,9 +4,10 @@ import UIKit
 
 class ListingsViewController: UIViewController {
     let listingCellIdentifier = "listingCell"
-    
     var collectionView: UICollectionView { return self.view as! UICollectionView }
     var listings = [SearchResult.Listing]()
+    var imageLoader: ImageLoader?
+    weak var delegate: ListingBrowserDelegate?
 
     override func loadView() {
         self.view = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
@@ -27,7 +28,7 @@ class ListingsViewController: UIViewController {
         }
     }
 
-    let layout: UICollectionViewFlowLayout = {
+    lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         let insetLeft: CGFloat = 5.0
         let insetRight: CGFloat = 5.0
@@ -45,6 +46,7 @@ extension ListingsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let listing = listings[indexPath.row]
         print(listing.title)
+        delegate?.showListing(listing)
     }
 }
 
@@ -54,8 +56,24 @@ extension ListingsViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listingCellIdentifier, for: indexPath) as! ListingCollectionViewCell
-        cell.setup(with: listings[indexPath.row])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listingCellIdentifier,
+                                                      for: indexPath) as! ListingCollectionViewCell
+        let listing = listings[indexPath.row]
+        cell.setup(with: listing)
+
+        if let url = listing.pictureHref {
+            imageLoader?.loadImage(url: url, completion: { (image, error) in
+                DispatchQueue.main.async {
+                    guard error == nil else {
+                        print("Error: \(error)")
+                        return
+                    }
+                    if image != nil {
+                        cell.imageView.image = image
+                    }
+                }
+            })
+        }
         return cell
     }
 

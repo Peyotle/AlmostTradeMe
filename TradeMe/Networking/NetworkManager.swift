@@ -8,7 +8,10 @@ protocol NetworkManager {
     func getCategory(_ categoryId: Int, completion: @escaping ListingSearchCompletion)
 }
 
-class NetworkManagerImpl: NSObject, NetworkManager, URLSessionDelegate {
+protocol ImageLoader {
+    func loadImage(url: URL, completion: @escaping (UIImage?, Error?) -> ())
+}
+class NetworkManagerImpl: NetworkManager {
     let consumerKey = "A1AC63F0332A131A78FAC304D007E7D1"
     let oauthSignature = "EC7F18B17A062962C6930A8AE88B16C7"
     var oauthswift: OAuth1Swift!
@@ -20,19 +23,20 @@ class NetworkManagerImpl: NSObject, NetworkManager, URLSessionDelegate {
             consumerKey:    consumerKey,
             consumerSecret: oauthSignature
         )
-        _ = oauthswift.client.get(path,
-                                  success: { [weak self] response in
-                                    print("Got response =====================")
-                                    guard let result = self?.decodeJSON(from: response.data) else {
+        DispatchQueue.global().async { [weak self] in
+            _ = self?.oauthswift.client.get(path,
+                                      success: { response in
+                                        print("Got response =====================")
+                                        guard let result = self?.decodeJSON(from: response.data) else {
+                                            completion(nil)
+                                            return
+                                        }
+                                        completion(result)},
+                                      failure: { error in
+                                        print("Error: \(error)")
                                         completion(nil)
-                                        return
-                                    }
-                                    completion(result)
-        },
-                                  failure: { error in
-                                    print("Error: \(error)")
-                                    completion(nil)
-        })
+            })
+        }
     }
 
     func decodeJSON(from data: Data) -> SearchResult? {
@@ -45,6 +49,20 @@ class NetworkManagerImpl: NSObject, NetworkManager, URLSessionDelegate {
             print("JSON parsing error: \(error.localizedDescription)")
             return nil
         }
+    }
+}
+
+extension NetworkManagerImpl: ImageLoader {
+    func loadImage(url: URL, completion: @escaping (UIImage?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil, error)
+                return
+            }
+            let image = UIImage(data: data)
+            completion(image, nil)
+            }
+            .resume()
     }
 }
 
