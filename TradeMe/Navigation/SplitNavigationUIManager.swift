@@ -6,7 +6,7 @@ class SplitNavigationUIManager {
     let splitViewController: UISplitViewController
     let listingsNavigation: UINavigationController
     let categoryNavigation: UINavigationController
-    var showDetailsAction: (() -> ())?
+    var showListingsAction: (() -> ())?
     var showCategoriesAction: (() -> ())?
 
     init(with splitViewController: UISplitViewController,
@@ -29,7 +29,7 @@ class SplitNavigationUIManager {
         guard let activeViewController = splitViewController.viewControllers.first else { return }
         
         if let categoriesController = categoryNavigation.topViewController {
-            let navigationButton = UIBarButtonItem(title: "Listings", style: .plain, target: self, action: #selector(self.showDetails))
+            let navigationButton = UIBarButtonItem(title: "Listings", style: .plain, target: self, action: #selector(self.showListings))
             categoriesController.navigationItem.setRightBarButton(navigationButton, animated: false)
         }
 
@@ -50,8 +50,8 @@ class SplitNavigationUIManager {
     }
 
     // MARK: - Compact width navigation
-    @objc func showDetails() {
-        showDetailsAction?()
+    @objc func showListings() {
+        showListingsAction?()
     }
 
     @objc func showCategories() {

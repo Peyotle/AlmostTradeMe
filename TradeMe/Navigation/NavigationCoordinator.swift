@@ -32,7 +32,7 @@ class NavigationCoordinator: CategoryBrowserDelegate {
                                                        listingsNavigation: listingsNavigation!,
                                                        categoryNavigation: categoryNavigation!)
         navigationUIManager?.showCategoriesAction = { self.showCategories() }
-        navigationUIManager?.showDetailsAction = { self.showDetails() }
+        navigationUIManager?.showListingsAction = { self.showListings() }
     }
 
     func showCategory(_ category: SearchResult.Category) {
@@ -88,7 +88,7 @@ class NavigationCoordinator: CategoryBrowserDelegate {
     private func presentListings(_ listings: [SearchResult.Listing]) {
         let viewController = ListingsViewController()
         viewController.delegate = self
-        viewController.imageLoader = NetworkManagerImpl()
+        viewController.imageLoader = self.networking//NetworkManagerImpl()
         
         viewController.listings = listings
         viewController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -105,9 +105,9 @@ class NavigationCoordinator: CategoryBrowserDelegate {
     }
 
     // MARK: - Compact width navigation
-    func showDetails() {
+    func showListings() {
         splitViewController!.showDetailViewController(listingsNavigation!, sender: self)
-         navigationUIManager?.showNavigationButtonsIfNeeded()
+        navigationUIManager?.showNavigationButtonsIfNeeded()
     }
 
     func showCategories() {
@@ -119,7 +119,10 @@ class NavigationCoordinator: CategoryBrowserDelegate {
 
 extension NavigationCoordinator: ListingBrowserDelegate {
     func showListing(_ listing: SearchResult.Listing) {
-        let listingViewController = ListingDetailsViewController()
+        let listingViewController = ListingDetailsViewController(with: listing)
+        listingViewController.listingLoader = self.networking
+        listingViewController.imageLoader = self.networking
+        
         listingViewController.title = listing.title
         listingsNavigation?.pushViewController(listingViewController, animated: true)
     }

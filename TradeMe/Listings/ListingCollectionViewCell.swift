@@ -52,7 +52,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
 
     func setup(with listing: SearchResult.Listing) {
         titleLabel.text = listing.title
-        idLabel.text = "Id: \(listing.listingId)"
+        idLabel.text = "Listing #: \(listing.listingId)"
         if listing.pictureHref == nil {
             self.imageView.image = UIImage(named: "no_photo")
             self.contentView.layoutIfNeeded()
@@ -71,7 +71,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
     }()
 
     let imageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

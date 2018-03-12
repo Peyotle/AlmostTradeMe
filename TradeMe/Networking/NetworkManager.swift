@@ -4,21 +4,28 @@ import Foundation
 import OAuthSwift
 
 protocol NetworkManager {
-    typealias ListingSearchCompletion = (SearchResult?) -> ()
-    func getCategory(_ categoryId: Int, completion: @escaping ListingSearchCompletion)
+    typealias CategorySearchCompletion = (SearchResult?) -> ()
+    func getCategory(_ categoryId: Int, completion: @escaping CategorySearchCompletion)
 }
 
 protocol ImageLoader {
     func loadImage(url: URL, completion: @escaping (UIImage?, Error?) -> ())
 }
+
+protocol ListingLoader {
+    typealias ListingSearchCompletion = (Listing?) -> ()
+    func getListing(_ listingId: Int, completion: @escaping ListingSearchCompletion)
+}
+
 class NetworkManagerImpl: NetworkManager {
     let consumerKey = "A1AC63F0332A131A78FAC304D007E7D1"
     let oauthSignature = "EC7F18B17A062962C6930A8AE88B16C7"
+    let rootPath = "https://api.tmsandbox.co.nz/v1"
     var oauthswift: OAuth1Swift!
     
-    func getCategory(_ categoryId: Int, completion: @escaping ListingSearchCompletion) {
-        let path = "https://api.tmsandbox.co.nz/v1/Search/General.json?rows=20&category=\(categoryId)"
-
+    func getCategory(_ categoryId: Int, completion: @escaping CategorySearchCompletion) {
+        let numberOfRows = 20
+        let path = "\(rootPath)/Search/General.json?rows=\(numberOfRows)&category=\(categoryId)"
         oauthswift = OAuth1Swift(
             consumerKey:    consumerKey,
             consumerSecret: oauthSignature
@@ -26,8 +33,7 @@ class NetworkManagerImpl: NetworkManager {
         DispatchQueue.global().async { [weak self] in
             _ = self?.oauthswift.client.get(path,
                                       success: { response in
-                                        print("Got response =====================")
-                                        guard let result = self?.decodeJSON(from: response.data) else {
+                                        guard let result = self?.decodeSearchResultJSON(from: response.data) else {
                                             completion(nil)
                                             return
                                         }
@@ -39,11 +45,23 @@ class NetworkManagerImpl: NetworkManager {
         }
     }
 
-    func decodeJSON(from data: Data) -> SearchResult? {
+    func decodeSearchResultJSON(from data: Data) -> SearchResult? {
         do {
             let decoder = JSONDecoder()
 
             let result = try decoder.decode(SearchResult.self, from: data)
+            return result
+        } catch {
+            print("JSON parsing error: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    func decodeJSON<T: Decodable>(from data: Data, ofType: T.Type) -> T? {
+        do {
+            let decoder = JSONDecoder()
+
+            let result = try decoder.decode(T.self, from: data)
             return result
         } catch {
             print("JSON parsing error: \(error.localizedDescription)")
@@ -66,9 +84,38 @@ extension NetworkManagerImpl: ImageLoader {
     }
 }
 
+extension NetworkManagerImpl: ListingLoader {
+    func getListing(_ listingId: Int, completion: @escaping ListingSearchCompletion) {
+        let path = "\(rootPath)/Listings/\(listingId).json"
+        oauthswift = OAuth1Swift(
+            consumerKey:    consumerKey,
+            consumerSecret: oauthSignature
+        )
+        DispatchQueue.global().async { [weak self] in
+            _ = self?.oauthswift.client.get(path,
+                                            success: { response in
+//                                                print("Listing loading result: \(response.dataString())")
+                                                guard let result = self?.decodeJSON(from: response.data, ofType: Listing.self) else {
+                                                    print("Can't get listing")
+                                                    completion(nil)
+                                                    return
+                                                }
+//                                                guard let result = self?.decodeSearchResultJSON(from: response.data) else {
+//                                                    completion(nil)
+//                                                    return
+//                                                }
+                                                completion(result)},
+                                            failure: { error in
+                                                print("Error: \(error)")
+                                                completion(nil)
+            })
+        }
+    }
+}
+
 class NetworkManagerLocal: NetworkManager {
 
-    func getCategory(_ categoryId: Int, completion: @escaping ListingSearchCompletion) {
+    func getCategory(_ categoryId: Int, completion: @escaping CategorySearchCompletion) {
         guard let jsonData = loadSampleJSON("SearchResults") else {
             print("Can't parse JSON data")
             completion(nil)

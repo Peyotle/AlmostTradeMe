@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4D0C41CDED3D562FC4051D62 /* Pods_TradeMeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02ED9B9F26A6A4EFBC2F0FA5 /* Pods_TradeMeTests.framework */; };
 		7C111AF52054CA7500E229AB /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C111AF42054CA7500E229AB /* LoadingTableViewCell.swift */; };
+		7C259A9A2056636600490C29 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C259A992056636600490C29 /* UIColor+theme.swift */; };
+		7C259A9C2056672700490C29 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C259A9B2056672700490C29 /* AppearanceManager.swift */; };
 		7C8FE32F20529F56004EE33E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE32E20529F56004EE33E /* AppDelegate.swift */; };
 		7C8FE33120529F56004EE33E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE33020529F56004EE33E /* CategoryViewController.swift */; };
 		7C8FE33620529F56004EE33E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C8FE33520529F56004EE33E /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 		7CF9D14A205527FA00FC086B /* ListingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9D149205527FA00FC086B /* ListingDetailsViewController.swift */; };
 		7CF9D14C2055C59900FC086B /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9D14B2055C59900FC086B /* CategoryTableViewCell.swift */; };
 		7CF9D14E2055EFC500FC086B /* SplitNavigationUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9D14D2055EFC500FC086B /* SplitNavigationUIManager.swift */; };
+		7CF9D15220561AA800FC086B /* UIView+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9D15120561AA800FC086B /* UIView+constraints.swift */; };
+		7CF9D154205637A200FC086B /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9D153205637A200FC086B /* Listing.swift */; };
 		FB76ED972BBA2B90C9B13C77 /* Pods_TradeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6972AA543E30F26C593308CF /* Pods_TradeMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +47,8 @@
 		650C7E866B0EE9E20ACAA945 /* Pods-TradeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe.debug.xcconfig"; sourceTree = "<group>"; };
 		6972AA543E30F26C593308CF /* Pods_TradeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TradeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C111AF42054CA7500E229AB /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
+		7C259A992056636600490C29 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
+		7C259A9B2056672700490C29 /* AppearanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		7C8FE32B20529F56004EE33E /* TradeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8FE32E20529F56004EE33E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C8FE33020529F56004EE33E /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +68,8 @@
 		7CF9D149205527FA00FC086B /* ListingDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailsViewController.swift; sourceTree = "<group>"; };
 		7CF9D14B2055C59900FC086B /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		7CF9D14D2055EFC500FC086B /* SplitNavigationUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationUIManager.swift; sourceTree = "<group>"; };
+		7CF9D15120561AA800FC086B /* UIView+constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+constraints.swift"; sourceTree = "<group>"; };
+		7CF9D153205637A200FC086B /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		9A921B8BD74D9AFF691CB372 /* Pods-TradeMeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMeTests/Pods-TradeMeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DD16D67344C23D4CC4EA1795 /* Pods-TradeMeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TradeMeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TradeMeTests/Pods-TradeMeTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +94,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C259A9D2056673300490C29 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7CF9D15120561AA800FC086B /* UIView+constraints.swift */,
+				7C259A992056636600490C29 /* UIColor+theme.swift */,
+				7C259A9B2056672700490C29 /* AppearanceManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		7C8FE32220529F56004EE33E = {
 			isa = PBXGroup;
 			children = (
@@ -109,9 +127,11 @@
 		7C8FE32D20529F56004EE33E /* TradeMe */ = {
 			isa = PBXGroup;
 			children = (
+				7C259A9D2056673300490C29 /* Utils */,
 				7C8FE32E20529F56004EE33E /* AppDelegate.swift */,
 				7C8FE3562053812F004EE33E /* Navigation */,
 				7C8FE35320537F18004EE33E /* SearchResult.swift */,
+				7CF9D153205637A200FC086B /* Listing.swift */,
 				7C8FE35220537F18004EE33E /* SearchResults.json */,
 				7C8FE34F20537E90004EE33E /* Networking */,
 				7C8FE35C2053A442004EE33E /* Categories */,
@@ -411,10 +431,14 @@
 				7C111AF52054CA7500E229AB /* LoadingTableViewCell.swift in Sources */,
 				7C8FE35120537EC8004EE33E /* NetworkManager.swift in Sources */,
 				7C8FE33120529F56004EE33E /* CategoryViewController.swift in Sources */,
+				7C259A9A2056636600490C29 /* UIColor+theme.swift in Sources */,
 				7C8FE35520537F18004EE33E /* SearchResult.swift in Sources */,
 				7C8FE36020548897004EE33E /* ListingCollectionViewCell.swift in Sources */,
 				7C8FE35820538148004EE33E /* NavigationCoordinator.swift in Sources */,
+				7CF9D15220561AA800FC086B /* UIView+constraints.swift in Sources */,
 				7CF9D14C2055C59900FC086B /* CategoryTableViewCell.swift in Sources */,
+				7C259A9C2056672700490C29 /* AppearanceManager.swift in Sources */,
+				7CF9D154205637A200FC086B /* Listing.swift in Sources */,
 				7C8FE35E2053A66B004EE33E /* CategoryModel.swift in Sources */,
 				7C8FE32F20529F56004EE33E /* AppDelegate.swift in Sources */,
 				7C8FE35A205382F0004EE33E /* ListingsViewController.swift in Sources */,
