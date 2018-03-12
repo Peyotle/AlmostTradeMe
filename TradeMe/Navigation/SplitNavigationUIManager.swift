@@ -25,16 +25,19 @@ class SplitNavigationUIManager {
         }
     }
     func addNavigationButtons() {
-        print("Number of VC: \(splitViewController.viewControllers.count)")
-        guard let activeViewController = splitViewController.viewControllers.first else { return }
-        
         if let categoriesController = categoryNavigation.topViewController {
-            let navigationButton = UIBarButtonItem(title: "Listings", style: .plain, target: self, action: #selector(self.showListings))
+            let navigationButton = UIBarButtonItem(title: "Listings",
+                                                   style: .plain,
+                                                   target: self,
+                                                   action: #selector(self.showListings))
             categoriesController.navigationItem.setRightBarButton(navigationButton, animated: false)
         }
 
         if let listingsController = listingsNavigation.topViewController {
-            let navigationButton = UIBarButtonItem(title: "Show Categories", style: .plain, target: self, action: #selector(self.showCategories))
+            let navigationButton = UIBarButtonItem(title: "Categories",
+                                                   style: .plain,
+                                                   target: self,
+                                                   action: #selector(self.showCategories))
             listingsController.navigationItem.setRightBarButton(navigationButton, animated: true)
         }
     }

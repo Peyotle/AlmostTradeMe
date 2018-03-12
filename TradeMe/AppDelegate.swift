@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let masterNavigator = UINavigationController()
         let detailNavigator = UINavigationController()
         splitViewController.viewControllers = [masterNavigator, detailNavigator]
-//        splitViewController.preferredDisplayMode = .primaryHidden
+        splitViewController.preferredDisplayMode = .allVisible
         return splitViewController
     }
 

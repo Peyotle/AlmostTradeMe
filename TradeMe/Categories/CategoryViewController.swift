@@ -8,12 +8,11 @@ class CategoryViewController: UIViewController {
 
     var tableView: UITableView { return self.view as! UITableView }
     weak var delegate: CategoryBrowserDelegate?
-    var categories = [SearchResult.Category]()
+    private var categories: [SearchResult.Category] { return model?.categories ?? [] }
     private var model: CategoryModel?
 
     func setModel(_ model: CategoryModel) {
         self.model = model
-        self.categories = model.categories
         self.title = model.name
         self.tableView.reloadData()
     }
@@ -35,24 +34,17 @@ class CategoryViewController: UIViewController {
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if isMovingFromParentViewController {
-            if let model = model {
-                delegate?.movingBack(to: model.parentCategoryId)
-            }
-        }
+        super.viewDidDisappear(animated)
+        guard isMovingFromParentViewController, let model = model else { return }
+            delegate?.movingBack(to: model.parentCategoryId)
     }
 }
 
 extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard categories.count > 0 else { return }
         let selectedCategory = categories[indexPath.row]
         delegate?.showCategory(selectedCategory)
-//        if selectedCategory.hasSubcategory {
-//            delegate?.moveToCategory(id: selectedCategory.categoryId, name: selectedCategory.name)
-//        } else {
-//            delegate?.updateCategory(id: selectedCategory.categoryId, name: selectedCategory.name)
-//        }
     }
 }
 

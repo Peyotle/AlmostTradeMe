@@ -135,7 +135,7 @@ extension NavigationCoordinator: UISplitViewControllerDelegate {
     }
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
-        listingsNavigation?.popToRootViewController(animated: true)
+//        listingsNavigation?.popToRootViewController(animated: true)
         navigationUIManager?.addNavigationButtons()
         return true
     }

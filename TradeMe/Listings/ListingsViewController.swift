@@ -30,16 +30,16 @@ class ListingsViewController: UIViewController {
 
     lazy var layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        let insetLeft: CGFloat = 5.0
-        let insetRight: CGFloat = 5.0
         layout.sectionInset = UIEdgeInsets(top: 10,
-                                           left: insetLeft,
-                                           bottom: 5.0,
-                                           right: insetRight)
-        let itemWidth = 50.0
-        layout.itemSize = CGSize(width: 200.0, height: 200.0)
+                                           left: 10,
+                                           bottom: 20,
+                                           right: 10)
         return layout
     }()
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
 }
 
 extension ListingsViewController: UICollectionViewDelegate {
@@ -55,7 +55,8 @@ extension ListingsViewController: UICollectionViewDataSource {
         return listings.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: listingCellIdentifier,
                                                       for: indexPath) as! ListingCollectionViewCell
         let listing = listings[indexPath.row]
@@ -69,12 +70,33 @@ extension ListingsViewController: UICollectionViewDataSource {
                         return
                     }
                     if image != nil {
-                        cell.imageView.image = image
+                        cell.image = image
                     }
                 }
             })
         }
         return cell
     }
+}
 
+extension ListingsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let safeInsets = view.safeAreaInsets.left + view.safeAreaInsets.right
+        let inset = layout.sectionInset
+        let viewWithoutInsets = view.bounds.size.width - inset.left - inset.right - safeInsets
+        let numberOfCells = max(floor(viewWithoutInsets / 250.0), 1)
+        let sideLength = viewWithoutInsets / numberOfCells - inset.left / 2
+        return CGSize(width: sideLength, height: sideLength)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        collectionView.collectionViewLayout.invalidateLayout()
+        return proposedContentOffset
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5.0
+    }
 }
