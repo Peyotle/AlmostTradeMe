@@ -5,6 +5,7 @@ import UIKit
 protocol CategoryBrowserDelegate: class {
     func moveToCategory(_ category: Category)
     func movingBack()
+    func reload()
 }
 
 protocol ListingBrowserDelegate: class {
@@ -35,6 +36,11 @@ class NavigationCoordinator: CategoryBrowserDelegate {
     func start() {
         presentCategoryController()
         loadCategory("0")
+    }
+
+    func reload() {
+        let currentCategory = navigationStack.last?.number ?? "0"
+        loadCategory(currentCategory)
     }
 
     func moveToCategory(_ category: Category) {

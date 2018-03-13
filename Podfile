@@ -6,7 +6,7 @@ target 'TradeMe' do
   use_frameworks!
 
   pod 'OAuthSwift', '~> 1.2.0'
-
+  pod 'BRYXBanner'
   target 'TradeMeTests' do
     inherit! :search_paths
     # Pods for testing

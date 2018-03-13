@@ -12,13 +12,13 @@
 		7C259A9A2056636600490C29 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C259A992056636600490C29 /* UIColor+theme.swift */; };
 		7C259A9C2056672700490C29 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C259A9B2056672700490C29 /* Appearance.swift */; };
 		7C259A9F20566FA800490C29 /* ListingDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C259A9E20566FA800490C29 /* ListingDetailsView.swift */; };
+		7C883BA62057DC0D008D4541 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C883BA52057DC0D008D4541 /* ErrorPresenter.swift */; };
 		7C8FE32F20529F56004EE33E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE32E20529F56004EE33E /* AppDelegate.swift */; };
 		7C8FE33120529F56004EE33E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE33020529F56004EE33E /* CategoryViewController.swift */; };
 		7C8FE33620529F56004EE33E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C8FE33520529F56004EE33E /* Assets.xcassets */; };
 		7C8FE33920529F56004EE33E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C8FE33720529F56004EE33E /* LaunchScreen.storyboard */; };
 		7C8FE34420529F56004EE33E /* TradeMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE34320529F56004EE33E /* TradeMeTests.swift */; };
 		7C8FE35120537EC8004EE33E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35020537EC8004EE33E /* NetworkManager.swift */; };
-		7C8FE35420537F18004EE33E /* SearchResults.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C8FE35220537F18004EE33E /* SearchResults.json */; };
 		7C8FE35520537F18004EE33E /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35320537F18004EE33E /* SearchResult.swift */; };
 		7C8FE35820538148004EE33E /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE35720538148004EE33E /* NavigationCoordinator.swift */; };
 		7C8FE35A205382F0004EE33E /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8FE359205382F0004EE33E /* ListingsViewController.swift */; };
@@ -51,6 +51,7 @@
 		7C259A992056636600490C29 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		7C259A9B2056672700490C29 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		7C259A9E20566FA800490C29 /* ListingDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailsView.swift; sourceTree = "<group>"; };
+		7C883BA52057DC0D008D4541 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		7C8FE32B20529F56004EE33E /* TradeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8FE32E20529F56004EE33E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C8FE33020529F56004EE33E /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		7C8FE34320529F56004EE33E /* TradeMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeMeTests.swift; sourceTree = "<group>"; };
 		7C8FE34520529F56004EE33E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C8FE35020537EC8004EE33E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		7C8FE35220537F18004EE33E /* SearchResults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SearchResults.json; sourceTree = "<group>"; };
 		7C8FE35320537F18004EE33E /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		7C8FE35720538148004EE33E /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		7C8FE359205382F0004EE33E /* ListingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingsViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +102,7 @@
 				7CF9D15120561AA800FC086B /* UIView+constraints.swift */,
 				7C259A992056636600490C29 /* UIColor+theme.swift */,
 				7C259A9B2056672700490C29 /* Appearance.swift */,
+				7C883BA52057DC0D008D4541 /* ErrorPresenter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -134,7 +135,6 @@
 				7C8FE3562053812F004EE33E /* Navigation */,
 				7C8FE35320537F18004EE33E /* SearchResult.swift */,
 				7CF9D153205637A200FC086B /* Listing.swift */,
-				7C8FE35220537F18004EE33E /* SearchResults.json */,
 				7C8FE34F20537E90004EE33E /* Networking */,
 				7C8FE35C2053A442004EE33E /* Categories */,
 				7C8FE35B2053A439004EE33E /* Listings */,
@@ -310,7 +310,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C8FE33920529F56004EE33E /* LaunchScreen.storyboard in Resources */,
-				7C8FE35420537F18004EE33E /* SearchResults.json in Resources */,
 				7C8FE33620529F56004EE33E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,10 +397,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TradeMe/Pods-TradeMe-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BRYXBanner/BRYXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRYXBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +443,7 @@
 				7CF9D14C2055C59900FC086B /* CategoryTableViewCell.swift in Sources */,
 				7C259A9C2056672700490C29 /* Appearance.swift in Sources */,
 				7CF9D154205637A200FC086B /* Listing.swift in Sources */,
+				7C883BA62057DC0D008D4541 /* ErrorPresenter.swift in Sources */,
 				7C8FE35E2053A66B004EE33E /* CategoryModel.swift in Sources */,
 				7C8FE32F20529F56004EE33E /* AppDelegate.swift in Sources */,
 				7C8FE35A205382F0004EE33E /* ListingsViewController.swift in Sources */,

@@ -10,6 +10,7 @@ class CategoryViewController: UIViewController {
     weak var delegate: CategoryBrowserDelegate?
     private var nonEmptyCategories: [Category] { return model?.subcategories?.filter { $0.count != nil } ?? [] }
     private var model: Category?
+    private let refreshControl = UIRefreshControl()
 
     func setModel(_ model: Category) {
         self.model = model
@@ -24,6 +25,7 @@ class CategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupPullToRefresh()
     }
 
     func setupTableView() {
@@ -31,6 +33,17 @@ class CategoryViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: categoryCellIdentifier)
         tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: loadingCellIdentifier)
+    }
+
+    func setupPullToRefresh() {
+        tableView.refreshControl = refreshControl
+        refreshControl.tintColor = UIColor.darkGray
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+    }
+
+    @objc func reloadData() {
+        refreshControl.endRefreshing()
+        delegate?.reload()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
