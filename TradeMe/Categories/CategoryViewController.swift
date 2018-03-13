@@ -8,10 +8,10 @@ class CategoryViewController: UIViewController {
 
     var tableView: UITableView { return self.view as! UITableView }
     weak var delegate: CategoryBrowserDelegate?
-    private var categories: [SearchResult.Category] { return model?.categories ?? [] }
-    private var model: CategoryModel?
+    private var nonEmptyCategories: [Category] { return model?.subcategories?.filter { $0.count != nil } ?? [] }
+    private var model: Category?
 
-    func setModel(_ model: CategoryModel) {
+    func setModel(_ model: Category) {
         self.model = model
         self.title = model.name
         self.tableView.reloadData()
@@ -35,16 +35,16 @@ class CategoryViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        guard isMovingFromParentViewController, let model = model else { return }
-            delegate?.movingBack(to: model.parentCategoryId)
+        guard isMovingFromParentViewController else { return }
+        delegate?.movingBack()
     }
 }
 
 extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard categories.count > 0 else { return }
-        let selectedCategory = categories[indexPath.row]
-        delegate?.showCategory(selectedCategory)
+        guard nonEmptyCategories.count > 0 else { return }
+        let selectedCategory = nonEmptyCategories[indexPath.row]
+        delegate?.moveToCategory(selectedCategory)
     }
 }
 
@@ -53,7 +53,7 @@ extension CategoryViewController: UITableViewDataSource {
         guard (self.model != nil) else {
             return 1
         }
-        return categories.count
+        return nonEmptyCategories.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,7 +61,7 @@ extension CategoryViewController: UITableViewDataSource {
             return tableView.dequeueReusableCell(withIdentifier: loadingCellIdentifier)!
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellIdentifier) as! CategoryTableViewCell
-        let category = categories[indexPath.row]
+        let category = nonEmptyCategories[indexPath.row]
         cell.setup(with: category)
         return cell
     }

@@ -12,13 +12,14 @@ class CategoryTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setup(with category: SearchResult.Category) {
+    func setup(with category: Category) {
         if category.hasSubcategory {
             self.accessoryType = .disclosureIndicator
         }
 
         self.textLabel?.text = category.name
-        self.detailTextLabel?.text = "Count: \(category.count)"
+        let count = category.count ?? 0
+        self.detailTextLabel?.text = "Count: \(count)"
     }
 
     override func prepareForReuse() {

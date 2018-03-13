@@ -9,7 +9,9 @@ enum NetworkError: Error {
 
 protocol NetworkManager {
     typealias CategorySearchCompletion = (SearchResult?) -> ()
-    func getCategory(_ categoryId: Int, completion: @escaping CategorySearchCompletion)
+    typealias CategoryCompletion = (Category?) -> ()
+    func getListings(_ categoryNumber: String, completion: @escaping CategorySearchCompletion)
+    func getCategory(_ number: String, completion: @escaping CategoryCompletion)
 }
 
 protocol ImageLoader {
@@ -27,9 +29,9 @@ class NetworkManagerImpl: NetworkManager {
     let rootPath = "https://api.tmsandbox.co.nz/v1"
     var oauthswift: OAuth1Swift!
     
-    func getCategory(_ categoryId: Int, completion: @escaping CategorySearchCompletion) {
+    func getListings(_ categoryNumber: String, completion: @escaping CategorySearchCompletion) {
         let numberOfRows = 20
-        let path = "\(rootPath)/Search/General.json?rows=\(numberOfRows)&category=\(categoryId)"
+        let path = "\(rootPath)/Search/General.json?rows=\(numberOfRows)&category=\(categoryNumber)"
         oauthswift = OAuth1Swift(
             consumerKey:    consumerKey,
             consumerSecret: oauthSignature
@@ -54,6 +56,34 @@ class NetworkManagerImpl: NetworkManager {
             })
         }
     }
+
+    func getCategory(_ number: String, completion: @escaping CategoryCompletion) {
+        let path = "\(rootPath)/Categories/\(number).json?depth=1&with_counts=true"
+        oauthswift = OAuth1Swift(
+            consumerKey:    consumerKey,
+            consumerSecret: oauthSignature
+        )
+        DispatchQueue.global().async { [weak self] in
+            _ = self?.oauthswift.client.get(path,
+                                            success: { response in
+                                                let httpResponse = response.response
+                                                guard httpResponse.statusCode == 200 else {
+                                                    print("Category loading error. Response: ", httpResponse.statusCode)
+                                                    completion(nil)
+                                                    return
+                                                }
+                                                guard let result = self?.decodeJSON(from: response.data, ofType: Category.self) else {
+                                                    completion(nil)
+                                                    return
+                                                }
+                                                completion(result)},
+                                            failure: { error in
+                                                print("Error: \(error)")
+                                                completion(nil)
+            })
+        }
+    }
+
     func decodeJSON<T: Decodable>(from data: Data, ofType: T.Type) -> T? {
         do {
             let decoder = JSONDecoder()
@@ -77,7 +107,7 @@ extension NetworkManagerImpl: ImageLoader {
                 return
             }
             guard let data = data, error == nil else {
-                print("Error loading image: ", error)
+                print("Error loading image: ", error ?? "")
                 completion(nil, error)
                 return
             }
@@ -115,35 +145,5 @@ extension NetworkManagerImpl: ListingLoader {
                                                 completion(nil)
             })
         }
-    }
-}
-
-class NetworkManagerLocal: NetworkManager {
-    func getCategory(_ categoryId: Int, completion: @escaping CategorySearchCompletion) {
-        guard let jsonData = loadSampleJSON("SearchResults") else {
-            print("Can't parse JSON data")
-            completion(nil)
-            return
-        }
-        let decoder = JSONDecoder()
-        do {
-            let result = try decoder.decode(SearchResult.self, from: jsonData)
-            completion(result)
-        } catch {
-            print("JSON parsing error: \(error.localizedDescription)")
-            completion(nil)
-        }
-    }
-
-    func loadSampleJSON(_ name: String) -> Data? {
-        if let fileURL = Bundle.main.url(forResource: name, withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: fileURL)
-                return data
-            } catch {
-                print("Cant load JSON: \(error.localizedDescription)")
-            }
-        }
-        return nil
     }
 }
