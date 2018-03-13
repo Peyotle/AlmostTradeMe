@@ -32,10 +32,6 @@ class ListingCollectionViewCell: UICollectionViewCell {
         setupView()
     }
 
-    override func awakeFromNib() {
-        print("Awake")
-    }
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

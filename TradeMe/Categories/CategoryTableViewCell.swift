@@ -20,4 +20,9 @@ class CategoryTableViewCell: UITableViewCell {
         self.textLabel?.text = category.name
         self.detailTextLabel?.text = "Count: \(category.count)"
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.accessoryType = .none
+    }
 }

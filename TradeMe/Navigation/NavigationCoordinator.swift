@@ -17,7 +17,6 @@ class NavigationCoordinator: CategoryBrowserDelegate {
     var listingsNavigation: UINavigationController?
     var splitViewController: UISplitViewController?
 
-    var selectedCategoryId: Int = 0
     var currentCategoryId: Int?
     var networking = NetworkManagerImpl()
     var navigationUIManager: SplitNavigationUIManager?
@@ -88,8 +87,7 @@ class NavigationCoordinator: CategoryBrowserDelegate {
     private func presentListings(_ listings: [SearchResult.Listing]) {
         let viewController = ListingsViewController()
         viewController.delegate = self
-        viewController.imageLoader = self.networking//NetworkManagerImpl()
-        
+        viewController.imageLoader = self.networking
         viewController.listings = listings
         viewController.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         listingsNavigation?.viewControllers = [viewController]
@@ -101,7 +99,6 @@ class NavigationCoordinator: CategoryBrowserDelegate {
         let title = viewController?.title ?? "General"
         let categoryId = categoryId ?? 0
         self.updateListings(for: categoryId, name: title)
-        print("Moving to: \(categoryId)")
     }
 
     // MARK: - Compact width navigation
@@ -135,7 +132,7 @@ extension NavigationCoordinator: UISplitViewControllerDelegate {
     }
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
-//        listingsNavigation?.popToRootViewController(animated: true)
+        listingsNavigation?.popToRootViewController(animated: true)
         navigationUIManager?.addNavigationButtons()
         return true
     }

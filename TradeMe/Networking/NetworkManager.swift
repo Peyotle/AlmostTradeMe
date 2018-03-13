@@ -3,6 +3,10 @@
 import Foundation
 import OAuthSwift
 
+enum NetworkError: Error {
+    case loadingError
+}
+
 protocol NetworkManager {
     typealias CategorySearchCompletion = (SearchResult?) -> ()
     func getCategory(_ categoryId: Int, completion: @escaping CategorySearchCompletion)
@@ -33,6 +37,12 @@ class NetworkManagerImpl: NetworkManager {
         DispatchQueue.global().async { [weak self] in
             _ = self?.oauthswift.client.get(path,
                                       success: { response in
+                                        let httpResponse = response.response
+                                        guard httpResponse.statusCode == 200 else {
+                                            print("Category loading error. Response: ", httpResponse.statusCode)
+                                            completion(nil)
+                                            return
+                                        }
                                         guard let result = self?.decodeJSON(from: response.data, ofType: SearchResult.self) else {
                                             completion(nil)
                                             return
@@ -60,7 +70,14 @@ class NetworkManagerImpl: NetworkManager {
 extension NetworkManagerImpl: ImageLoader {
     func loadImage(url: URL, completion: @escaping (UIImage?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url) { data, response, error in
+            let httpResponse = response as! HTTPURLResponse
+            guard httpResponse.statusCode == 200 else {
+                print("Image liading error. Response: ", httpResponse.statusCode)
+                completion(nil, NetworkError.loadingError)
+                return
+            }
             guard let data = data, error == nil else {
+                print("Error loading image: ", error)
                 completion(nil, error)
                 return
             }
@@ -81,6 +98,12 @@ extension NetworkManagerImpl: ListingLoader {
         DispatchQueue.global().async { [weak self] in
             _ = self?.oauthswift.client.get(path,
                                             success: { response in
+                                                let httpResponse = response.response
+                                                guard httpResponse.statusCode == 200 else {
+                                                    print("Listing loading error. Response: ", httpResponse.statusCode)
+                                                    completion(nil)
+                                                    return
+                                                }
                                                 guard let result = self?.decodeJSON(from: response.data, ofType: Listing.self) else {
                                                     print("Can't get listing")
                                                     completion(nil)
@@ -96,7 +119,6 @@ extension NetworkManagerImpl: ListingLoader {
 }
 
 class NetworkManagerLocal: NetworkManager {
-
     func getCategory(_ categoryId: Int, completion: @escaping CategorySearchCompletion) {
         guard let jsonData = loadSampleJSON("SearchResults") else {
             print("Can't parse JSON data")

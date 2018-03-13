@@ -42,20 +42,29 @@ class ListingDetailsViewController: UIViewController {
         if let photo = listingDetails.photos?.first {
             imageLoader?.loadImage(url: photo.value.large, completion: { [weak self] (image, error) in
                 DispatchQueue.main.async {
+                    guard let image = image else {
+                        print("Error loading image: \(String(describing: error))")
+                        self?.showNoImage()
+                        return
+                    }
+                    self?.mainView.activityView.stopAnimating()
                     UIView.animate(withDuration: 0.2, animations: {
                         self?.mainView.imageView.image = image
                         self?.mainView.imageView.alpha = 1
-                        self?.mainView.activityView.stopAnimating()
                         self?.mainView.layoutIfNeeded()
                     })
                 }
             })
         } else {
-            mainView.activityView.stopAnimating()
-            UIView.animate(withDuration: 0.2, animations: {
-                self.mainView.imageView.alpha = 1
-                self.mainView.imageView.image = UIImage(named: "no_photo")
-            })
+            showNoImage()
         }
+    }
+
+    func showNoImage() {
+        mainView.activityView.stopAnimating()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.mainView.imageView.alpha = 1
+            self.mainView.imageView.image = UIImage(named: "no_photo")
+        })
     }
 }

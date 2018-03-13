@@ -45,7 +45,6 @@ class ListingsViewController: UIViewController {
 extension ListingsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let listing = listings[indexPath.row]
-        print(listing.title)
         delegate?.showListing(listing)
     }
 }
@@ -66,7 +65,7 @@ extension ListingsViewController: UICollectionViewDataSource {
             imageLoader?.loadImage(url: url, completion: { (image, error) in
                 DispatchQueue.main.async {
                     guard error == nil else {
-                        print("Error: \(String(describing: error))")
+                        cell.image = UIImage(named: "no_photo")
                         return
                     }
                     if image != nil {
@@ -84,8 +83,9 @@ extension ListingsViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let safeInsets = view.safeAreaInsets.left + view.safeAreaInsets.right
+        let contentInsets = collectionView.contentInset.left + collectionView.contentInset.right
         let inset = layout.sectionInset
-        let viewWithoutInsets = view.bounds.size.width - inset.left - inset.right - safeInsets
+        let viewWithoutInsets = view.bounds.size.width - inset.left - inset.right - contentInsets - safeInsets
         let numberOfCells = max(floor(viewWithoutInsets / 250.0), 1)
         let sideLength = viewWithoutInsets / numberOfCells - inset.left / 2
         return CGSize(width: sideLength, height: sideLength)
