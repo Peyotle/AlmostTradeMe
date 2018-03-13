@@ -66,7 +66,7 @@ extension ListingsViewController: UICollectionViewDataSource {
             imageLoader?.loadImage(url: url, completion: { (image, error) in
                 DispatchQueue.main.async {
                     guard error == nil else {
-                        print("Error: \(error)")
+                        print("Error: \(String(describing: error))")
                         return
                     }
                     if image != nil {

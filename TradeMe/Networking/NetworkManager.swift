@@ -33,7 +33,7 @@ class NetworkManagerImpl: NetworkManager {
         DispatchQueue.global().async { [weak self] in
             _ = self?.oauthswift.client.get(path,
                                       success: { response in
-                                        guard let result = self?.decodeSearchResultJSON(from: response.data) else {
+                                        guard let result = self?.decodeJSON(from: response.data, ofType: SearchResult.self) else {
                                             completion(nil)
                                             return
                                         }
@@ -44,19 +44,6 @@ class NetworkManagerImpl: NetworkManager {
             })
         }
     }
-
-    func decodeSearchResultJSON(from data: Data) -> SearchResult? {
-        do {
-            let decoder = JSONDecoder()
-
-            let result = try decoder.decode(SearchResult.self, from: data)
-            return result
-        } catch {
-            print("JSON parsing error: \(error.localizedDescription)")
-            return nil
-        }
-    }
-
     func decodeJSON<T: Decodable>(from data: Data, ofType: T.Type) -> T? {
         do {
             let decoder = JSONDecoder()
@@ -94,16 +81,11 @@ extension NetworkManagerImpl: ListingLoader {
         DispatchQueue.global().async { [weak self] in
             _ = self?.oauthswift.client.get(path,
                                             success: { response in
-//                                                print("Listing loading result: \(response.dataString())")
                                                 guard let result = self?.decodeJSON(from: response.data, ofType: Listing.self) else {
                                                     print("Can't get listing")
                                                     completion(nil)
                                                     return
                                                 }
-//                                                guard let result = self?.decodeSearchResultJSON(from: response.data) else {
-//                                                    completion(nil)
-//                                                    return
-//                                                }
                                                 completion(result)},
                                             failure: { error in
                                                 print("Error: \(error)")

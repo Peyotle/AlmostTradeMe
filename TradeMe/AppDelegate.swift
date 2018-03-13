@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coordinator.start()
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
-        AppearanceManager.apply()
+        Appearance.apply()
         return true
     }
 

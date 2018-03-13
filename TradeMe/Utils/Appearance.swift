@@ -2,7 +2,7 @@
 
 import UIKit
 
-struct AppearanceManager {
+struct Appearance {
     static func apply() {
         UINavigationBar.appearance().barTintColor = UIColor.tradeMeHeaderBase
         UINavigationBar.appearance().tintColor = UIColor.tradeMeHeaderInteractive
