@@ -23,6 +23,7 @@ class ListingCollectionViewCell: UICollectionViewCell {
                 self.imageView.isOpaque = true
             })
         } else {
+            self.imageView.image = nil
             activityView.startAnimating()
         }
     }
