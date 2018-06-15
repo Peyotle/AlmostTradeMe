@@ -114,7 +114,7 @@ extension NetworkManagerImpl {
                                             failure: { error in
                                                 if let error = error as? OAuthSwiftError,
                                                     (error.underlyingError != nil) {
-                                                    ErrorPresenter.present(error: error.underlyingError!)
+                                                    print("error: \(error.underlyingError!)")
                                                 }
                                                 print("Error: \(error)")
                                                 completion(nil)
